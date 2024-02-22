@@ -11,6 +11,15 @@ const routes: RouteRecordRaw[] = [
       hidden: true,
     },
   },
+  {
+    path: "/listeningList",
+    name: "ListeningList",
+    component: () => import("../views/listeningList/index.vue"),
+    meta: {
+      hidden: true,
+    },
+  },
+
 ];
 
 const router = createRouter({
