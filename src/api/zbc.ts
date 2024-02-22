@@ -1,4 +1,4 @@
-import result from "../../../../utils/request";
+import result from "../utils/request";
 
 export type GetNavData={
   categories:GetNavDataList[]
