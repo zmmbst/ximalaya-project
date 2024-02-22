@@ -1,12 +1,15 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
-import 'amfe-flexible'
-import Vant from 'vant'
-import 'vant/lib/index.css'
+import { createApp } from "vue";
+import App from "./App.vue";
+import "amfe-flexible";
+import Vant from "vant";
+import router from "./router/router";
+import pinia from "./stores";
+import "vant/lib/index.css";
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(Vant)
+app.use(Vant);
+app.use(pinia)
+app.use(router);
 
-app.mount('#app')
+app.mount("#app");
