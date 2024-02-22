@@ -5,7 +5,6 @@ import Vant from "vant";
 import router from "./router/router";
 import pinia from "./stores";
 import "vant/lib/index.css";
-
 const app = createApp(App);
 
 app.use(Vant);
