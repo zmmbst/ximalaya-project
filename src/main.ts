@@ -6,6 +6,7 @@ import "amfe-flexible";
 import router from "./router/router";
 import pinia from "./stores";
 import "vant/lib/index.css";
+import 'element-plus/dist/index.css'
 
 const app = createApp(App);
 

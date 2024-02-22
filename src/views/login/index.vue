@@ -33,12 +33,31 @@
             placeholder="请输入密码"
           />
         </van-cell-group>
-        <div class="login_button" style="margin: 16px">
-          <van-button round block type="primary" native-type="submit">
+        <div style="margin: 16px">
+          <van-button
+            color="#F86442"
+            round
+            block
+            type="primary"
+            native-type="submit"
+          >
             提交
           </van-button>
         </div>
       </van-form>
+      <van-checkbox class="login_check" v-model="checked">
+        <span>首次登录会自动创建新账号，且代表同意</span>
+        <a>《用户服务协议》</a>
+        <span>和</span>
+        <a>《隐私政策》</a>
+      </van-checkbox>
+      <van-divider :style="{ color: '#666' }" class="login_divider">
+        其他登录方式
+      </van-divider>
+      <div class="other_login">
+        <van-icon name="qq" />
+        <van-icon name="weibo" />
+      </div>
     </div>
   </div>
 </template>
@@ -50,7 +69,8 @@ export default defineComponent({
 });
 </script>
 <script setup lang="ts">
-import { Image,Form } from "vant";
+import { ref } from "vue";
+const checked = ref(true);
 </script>
 
 <style scoped lang="less">
@@ -79,8 +99,16 @@ import { Image,Form } from "vant";
       }
     }
   }
-  .login_button{
-    margin-top:20px;
+  .login_check {
+    align-items: flex-start;
+    font-size: 12px;
+  }
+  .login_divider {
+    margin-top: 250px;
+  }
+  .other_login {
+    display: flex;
+    justify-content: space-around;
   }
 }
 </style>
