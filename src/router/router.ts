@@ -11,6 +11,14 @@ const routes: RouteRecordRaw[] = [
       hidden: true,
     },
   },
+  {
+    path: "/video-details",
+    name: "video-details",
+    component: () => import("../views/video-details/index.vue"),
+    meta: {
+      hidden: true,
+    },
+  },
 ];
 
 const router = createRouter({
