@@ -11,6 +11,14 @@ const routes: RouteRecordRaw[] = [
       hidden: true,
     },
   },
+  {
+    path: "/homepage",
+    name: "Homepage",
+    component: () => import("../views/homepage/index.vue"),
+    meta: {
+      hidden: true,
+    },
+  }
 ];
 
 const router = createRouter({
