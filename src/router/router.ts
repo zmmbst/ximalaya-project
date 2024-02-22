@@ -18,7 +18,8 @@ const routes: RouteRecordRaw[] = [
     meta: {
       hidden: true,
     },
-  }
+  },
+  {
     path: "/listeningList",
     name: "ListeningList",
     component: () => import("../views/listeningList/index.vue"),
@@ -26,7 +27,6 @@ const routes: RouteRecordRaw[] = [
       hidden: true,
     },
   },
-
 ];
 
 const router = createRouter({
