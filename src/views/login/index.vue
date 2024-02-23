@@ -78,7 +78,7 @@ export default defineComponent({
 import { useRouter } from "vue-router";
 import { showNotify } from "vant";
 import { ref } from "vue";
-import { getLogin } from "../../api/login.ts";
+import { zmm_getLogin } from "../../api/login.ts";
 
 const router = useRouter()
 const checked = ref<boolean>(true);
@@ -103,7 +103,7 @@ const onSubmit = () => {
 };
 
 const getLoginHandle = async () => {
-  const result = await getLogin({
+  const result = await zmm_getLogin({
     phone: phone.value,
     password: password.value,
   });
