@@ -1,4 +1,4 @@
-import result from "../utils/request";
+import request from "../utils/request";
 
 export type GetNavData={
   categories:GetNavDataList[]
@@ -10,8 +10,10 @@ name: string,
 pageView: number
 }
 
+
+
 export default {
   getNav() {
-    return result.get(`https://m.ximalaya.com/revision/subject/category`)
+    return request.get<any,GetNavDataList>(`api/revision/subject/category`)
   }
 }
