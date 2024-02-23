@@ -3,14 +3,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 const history = createWebHistory();
 
 const routes: RouteRecordRaw[] = [
-  {
-    path: "/login",
-    name: "Login",
-    component: () => import("../views/login/index.vue"),
-    meta: {
-      hidden: true,
-    },
-  },
+
   {
     path: "/listeningList",
     name: "ListeningList",

@@ -97,7 +97,14 @@
         <van-tab title="情感生活">内容 4</van-tab>
         <van-tab title="情感生活">内容 4</van-tab>
       </van-tabs>
-      <van-icon name="arrow-down" class="box1"/>
+      <van-collapse v-model="activeNames" class="box1"
+      size="large"
+      >
+        <van-collapse-item  name="1"   >
+          代码是写出来给人看的，附带能在机器上运行。
+        </van-collapse-item>
+     
+      </van-collapse>
     </div>
   </div>
 </template>
@@ -112,27 +119,33 @@ export default defineComponent({
 
 <script lang="ts" setup>
 const active = ref(0);
+const activeNames = ref(["0"]);
 </script>
 
 <style lang="less" scoped>
 .zbc_category_sort {
   .navigation {
     position: relative;
-    .box1{
-     position: absolute;
-     top: 8px;
-     right: 10px;
+    .box1 {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      border: solid 1px #e8e8e9;
+      width: 30px;
+      padding-right: 15px;
+      // ::v-deep(.van-cell_right-icon){
+      //   top: 4px;
+      // }
     }
     .classification_label {
       .card_list {
-
         margin-top: 1px;
 
         margin-bottom: 20px;
 
-        padding:0 20px;
+        padding: 0 20px;
         padding-top: 13px;
-        border-top: solid 0.5px  #e7e6e6;;
+        border-top: solid 0.5px #e7e6e6;
         img {
           width: 85px;
         }
