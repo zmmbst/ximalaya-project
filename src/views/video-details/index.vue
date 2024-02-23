@@ -10,7 +10,6 @@
                 <span class="tou-zuozhe" >超能童话镇</span>
             </a>
             <div class="top-boufang">
-
                 <span class="top-bofang">
                     <van-icon class="top-bofangtubiao" name="play" />
                 <span class="top-bofangliang">141.90万
@@ -40,13 +39,14 @@
             </div>
         </div>
         <div class="program">
-            <div class="">
-                <div>节目(150)</div>
-                <div>切换顺序</div>
-            </div>
-            <div>
-                
-            </div>
+           <div class="yihang">
+                <div class="list-track">节目(150)</div>
+            
+                <span class="change-sort" ><van-icon name="sort" />切换顺序</span>
+           </div>
+           <ul class="tabulation">
+            <li></li>
+           </ul>
             
         </div>
     </div>
@@ -186,14 +186,29 @@
                             max-width: 100%;
                             height: 2541px;
                             // border: none;
-                            width: 345px;
+                            width: 348px;
                             // font-size: 10px;
                         }
                     }
 
             }
         }
+        .program{
+            padding: 15px 15px 0;
+            .yihang{
+                display: flex;
+                justify-content: space-between;
+                .list-track{
+                    font-size: 18px;
+                    font-weight: 700;
+                }
+                .change-sort{
+                    font-size: 14px;
+                    color: #999;
 
+                }
+            }
+        }
   }
   </style>
   
