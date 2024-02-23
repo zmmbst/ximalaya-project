@@ -14,7 +14,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import("../views/sort/index.vue"),
   },
   {
-    path: "/homepage",
+    path: "/",
     name: "Homepage",
     component: () => import("../views/homepage/index.vue"),
     meta: {

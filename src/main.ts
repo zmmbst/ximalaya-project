@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import Vant from "vant";
-import ElementPlus from 'element-plus'
+import ElementPlus from "element-plus"
 import App from "./App.vue";
 import "amfe-flexible";
 import router from "./router/router";
