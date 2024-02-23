@@ -91,54 +91,72 @@
       <div class="ct-scrollbar">
         <div class="freeList">
           <img src="./images/pinkdog.jpg" alt="" />
+          <van-icon class="go" name="play-circle-o" />
+          <span>1.18亿</span>
           <p>
             一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
           </p>
         </div>
         <div class="freeList">
           <img src="./images/pinkdog.jpg" alt="" />
+          <van-icon class="go" name="play-circle-o" />
+          <span>1.18亿</span>
           <p>
             一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
           </p>
         </div>
         <div class="freeList">
           <img src="./images/pinkdog.jpg" alt="" />
+          <van-icon class="go" name="play-circle-o" />
+          <span>1.18亿</span>
           <p>
             一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
           </p>
         </div>
         <div class="freeList">
           <img src="./images/pinkdog.jpg" alt="" />
+          <van-icon class="go" name="play-circle-o" />
+          <span>1.18亿</span>
           <p>
             一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
           </p>
         </div>
         <div class="freeList">
           <img src="./images/pinkdog.jpg" alt="" />
+          <van-icon class="go" name="play-circle-o" />
+          <span>1.18亿</span>
           <p>
             一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
           </p>
         </div>
         <div class="freeList">
           <img src="./images/pinkdog.jpg" alt="" />
+          <van-icon class="go" name="play-circle-o" />
+          <span>1.18亿</span>
           <p>
             一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
           </p>
         </div>
         <div class="freeList">
           <img src="./images/pinkdog.jpg" alt="" />
+          <van-icon class="go" name="play-circle-o" />
+          <span>1.18亿</span>
           <p>
             一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
           </p>
         </div>
         <div class="freeList">
           <img src="./images/pinkdog.jpg" alt="" />
+          <van-icon class="go" name="play-circle-o" />
+          <span>1.18亿</span>
           <p>
             一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
           </p>
         </div>
       </div>
     </el-scrollbar>
+    <!-- 今日热点 -->
+    <div class="todayHot">今日热点</div>
   </div>
 </template>
   
@@ -161,6 +179,7 @@ const handleScroll = (e: any) => {
   
   <style lang="less" scoped>
 .container {
+  width: 385px;
   height: 100%;
   .home_top {
     // overflow: scroll;
@@ -318,27 +337,48 @@ const handleScroll = (e: any) => {
   }
   .ct-scrollbar {
     display: flex;
-    .freeList{
+    .freeList {
+      position: relative;
       margin-right: 10px;
       img {
-      display: block;
-      width: 115px;
-      height: 115px;
-      border-radius: 5px;
+        display: block;
+        width: 115px;
+        height: 115px;
+        border-radius: 5px;
+      }
+      .go {
+        position: absolute;
+        left: 5px;
+        bottom: 40px;
+      }
+      p {
+        width: 115px;
+        text-align: center;
+        margin: 0px;
+        color: #333;
+        font-size: 13px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+      }
+      span {
+        position: absolute;
+        left: 30px;
+        bottom: 43px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #333;
+      }
     }
-    p {
-      width: 115px;
-      text-align: center;
-      margin: 0px;
-      color: #333;
-      font-size: 13px;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      text-overflow: ellipsis;
-      -webkit-box-orient: vertical;
-    }
-    }
+  }
+  .todayHot {
+    font-size: 18px;
+    color: #40404c;
+    line-height: 25px;
+    margin: 17px 0 17px 15px;
+    font-weight: 700;
   }
   .el-carousel__item h3 {
     color: #475669;
