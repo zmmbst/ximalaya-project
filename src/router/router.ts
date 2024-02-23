@@ -7,9 +7,11 @@ const routes: RouteRecordRaw[] = [
     path: "/login",
     name: "Login",
     component: () => import("../views/login/index.vue"),
-    meta: {
-      hidden: true,
-    },
+  },
+  {
+    path: "/sort",
+    name: "Sort",
+    component: () => import("../views/sort/index.vue"),
   },
   {
     path: "/homepage",
