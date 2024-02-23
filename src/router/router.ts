@@ -36,7 +36,17 @@ const routes: RouteRecordRaw[] = [
     meta: {
       hidden: true,
     },
-  },
+    
+  }, 
+  {
+    path: "/fication",
+    name: "fication",
+    component: () => import("../views/fication/index.vue"),
+    meta: {
+      hidden: true,
+    },
+    
+  }, 
 ];
 
 const router = createRouter({
