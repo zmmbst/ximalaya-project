@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="head">
-      <a href="/login">
+      <a href="/home">
         <img class="xmly"
           src="https://imagev2.xmcdn.com/storages/3777-audiofreehighqps/49/07/GMCoOSMH3Kb7AAAPQgH_va2X.png">
         </img>
