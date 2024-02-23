@@ -80,7 +80,7 @@ import { showNotify } from "vant";
 import { ref } from "vue";
 import { zmm_getLogin } from "../../api/login.ts";
 
-const router = useRouter()
+const router = useRouter();
 const checked = ref<boolean>(true);
 const captchaorpassword = ref<boolean>(true);
 const phone = ref<string>("");
@@ -103,13 +103,18 @@ const onSubmit = () => {
 };
 
 const getLoginHandle = async () => {
-  const result = await zmm_getLogin({
-    phone: phone.value,
-    password: password.value,
-  });
-  // console.log(result);
-  localStorage.setItem("token", result.token);
-  router.push({ path: "/" });
+  try {
+    const result = await zmm_getLogin({
+      phone: phone.value,
+      password: password.value,
+    });
+    // console.log(result);
+    localStorage.setItem("token", result.token);
+    router.push({ path: "/" });
+  } catch (error) {
+    console.log(error);
+    showNotify("网络错误，请重试");
+  }
 };
 </script>
 
