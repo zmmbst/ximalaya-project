@@ -1,19 +1,11 @@
 import request from "../utils/request";
 
-export type GetNavData={
-  categories:GetNavDataList[]
-}
-export interface GetNavDataList{
-cid: number,
-title: string,
-name: string,
-pageView: number
-}
-
-
 
 export default {
-  getNav() {
-    return request.get<any,GetNavDataList>(`api/revision/subject/category`)
+  getNavData() {
+    return request.get(`api/revision/subject/category`)
+  },
+  getListenList(title?: any, pageNum?: any, pageSize?: any) {
+    return request.get(`api/revision/subject/categorySubjectList/${title}?pageNum=${pageNum}&pageSize=${pageSize}`)
   }
 }

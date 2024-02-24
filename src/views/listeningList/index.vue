@@ -2,42 +2,23 @@
   <div class="zbc_category_sort">
     <div class="navigation">
       <van-tabs v-model:active="active" color="#fc2a1c" class="navigation_box">
-        <van-tab title="热门" class="classification_label">
-          <div class="card_list">
-            <img src="./image/01.png" alt="" />
-            <div class="card_right">
-              <div class="card_right_top">
-                畅销书上新推荐第13期，这些书值得听
-              </div>
-              <div class="card_right_bottom">
-                <van-icon name="setting-o" /> 33&nbsp;&nbsp;&nbsp;&nbsp;
-                2121-2-23更新
-              </div>
-            </div>
-          </div>
-
-          <div class="card_list">
-            <img src="./image/01.png" alt="" />
-            <div class="card_right">
-              <div class="card_right_top">
-                畅销书上新推荐第13期，这些书值得听
-              </div>
-              <div class="card_right_bottom">
-                <van-icon name="setting-o" /> 33&nbsp;&nbsp;&nbsp;&nbsp;
-                2121-2-23更新
+        <van-tab v-for="item in navList" :key="item.index">
+          <template #title>{{ item.title }} </template>
+          <div class="classification_label">
+            <div class="card_list">
+              <img src="./image/01.png" alt="" />
+              <div class="card_right">
+                <div class="card_right_top">
+                  畅销书上新推荐第13期，这些书值得听
+                </div>
+                <div class="card_right_bottom">
+                  <van-icon name="setting-o" /> 33&nbsp;&nbsp;&nbsp;&nbsp;
+                  2121-2-23更新
+                </div>
               </div>
             </div>
           </div>
         </van-tab>
-
-        <van-tab title="热门">内容 2</van-tab>
-        <van-tab title="相声评书">内 容 3</van-tab>
-        <van-tab title="情感生活">内容 4</van-tab>
-        <van-tab title="情感生活">内容 4</van-tab>
-        <van-tab title="情感生活">内容 4</van-tab>
-        <van-tab title="情感生活">内容 4</van-tab>
-        <van-tab title="情感生活">内容 4</van-tab>
-        <van-tab title="情感生活">内容 4</van-tab>
       </van-tabs>
 
       <!-- 下拉 -->
@@ -57,14 +38,9 @@
       </div>
       <div class="box2" v-show="isPoll">
         <div class="box2_word">请选分类</div>
-        <button class="btn">全部</button>
-        <button class="btn">全部</button>
-        <button class="btn">全部</button>
-        <button class="btn">全部</button>
-        <button class="btn">全部</button>
-        <button class="btn">全部</button>
-        <button class="btn">全部</button>
-        <button class="btn">全部</button>
+        <button class="btn" v-for="item in navList" :key="item.cid">
+          {{ item.title }}
+        </button>
       </div>
     </div>
   </div>
@@ -72,7 +48,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
-
+import listenApi from "../../api/listening";
 export default defineComponent({
   name: "listeningList",
 });
@@ -81,6 +57,15 @@ export default defineComponent({
 <script lang="ts" setup>
 const active = ref(0);
 const isPoll = ref<boolean>(false);
+
+// 分类的标题
+const title = ref("youshengshu");
+// 听单列表的当前页码
+const pageNum = ref(1);
+// 听单列表下的每页条数
+const pageSize = ref(7);
+// 存储数据总条数
+const total = ref();
 // 下拉
 const asd = () => {
   return (isPoll.value = true);
@@ -89,7 +74,33 @@ const bbb = () => {
   return (isPoll.value = false);
 };
 
-onMounted(() => {});
+const navList = ref<{ [paramsName: string]: any }[]>([]);
+
+// 获取听单下的分类列表
+async function getNavData() {
+  const result = await listenApi.getNavData();
+
+  navList.value = result.categories;
+}
+
+const listenList = ref<{ [paramsName: string]: any }[]>([]);
+
+// 分类列表
+async function ListenList() {
+  const result = await listenApi.getListenList(
+    title.value,
+    pageNum.value,
+    pageSize.value
+  );
+  listenList.value = result.data.subjects;
+  total.value = result.totalCount;
+}
+console.log(total.value);
+
+onMounted(() => {
+  getNavData();
+  ListenList();
+});
 </script>
 
 <style lang="less" scoped>
@@ -112,6 +123,7 @@ onMounted(() => {});
     }
 
     .box2 {
+      width: 100%;
       z-index: 1;
       .box2_word {
         margin: 10px;
