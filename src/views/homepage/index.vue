@@ -9,12 +9,7 @@
     <!-- 搜索框 -->
     <van-search shape="round" value="{{ value }}" placeholder="搜索" />
     <!-- 轮播图 -->
-    <el-carousel
-      :interval="2000"
-      type="card"
-      height="139px"
-      indicator-position="none"
-    >
+    <el-carousel :interval="2000" type="card" height="139px" indicator-position="none">
       <el-carousel-item v-for="item in 6" :key="item">
         <h3 text="2xl" justify="center">{{ item }}</h3>
       </el-carousel-item>
