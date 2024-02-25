@@ -1,13 +1,15 @@
 <template>
   <div class="container">
-    <div class="home_top">
+    <!-- <div class="home_top">
       <div class="leftimg">
         <img src="./images//logo.png" alt="" />
       </div>
       <div class="rightbtn">打开APP</div>
-    </div>
+    </div> -->
+    <JgsHead />
     <!-- 搜索框 -->
-    <van-search shape="round" value="{{ value }}" placeholder="搜索" />
+    <!-- <van-search shape="round" value="{{ value }}" placeholder="搜索" /> -->
+    <JgsSearch />
     <!-- 轮播图 -->
     <el-carousel :interval="2000" type="card" height="139px" indicator-position="none">
       <el-carousel-item v-for="item in 6" :key="item">
@@ -157,6 +159,8 @@
   
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import JgsSearch from "../../components/JgsSearch/index.vue";
+import JgsHead from "../../components/JgsHead/index.vue";
 export default defineComponent({
   name: "homepage",
 });

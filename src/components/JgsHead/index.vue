@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="JgsHead">
     <div class="head">
-      <a href="/home">
+      <a href="/">
         <img class="xmly"
           src="https://imagev2.xmcdn.com/storages/3777-audiofreehighqps/49/07/GMCoOSMH3Kb7AAAPQgH_va2X.png">
         </img>
       </a>
-      <span class="enlarge"></span>
+      <!-- <span class="enlarge"></span> -->
       <a href="https://m.ximalaya.com/applink?open_xm=iting%3A%2F%2Fopen%3Fcopycode%3D1%2520http%253A%252F1%2523Xm001uMy2m%2523%2522&from=&keep=true&isSeo=true&fcid=10000&fpage=https%3A%2F%2Fm.ximalaya.com%2F"
         class="mlink">打开APP</a>
     </div>
@@ -24,6 +24,9 @@ export default defineComponent({
 </script>
 
 <style lang="less"scoped>
+.JgsHead {
+  background-color: white;
+}
 .head {
   height: 30px;
   display: flex;
