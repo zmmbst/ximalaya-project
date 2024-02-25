@@ -1,21 +1,39 @@
 <template>
   <div class="zbc_category_sort">
+    <JgsHead></JgsHead>
     <div class="navigation">
-      <van-tabs v-model:active="active" color="#fc2a1c" class="navigation_box">
-        <van-tab v-for="item in navList" :key="item.index">
+      <!-- 导航 -->
+      <van-tabs v-model:active="active" color="#fc2a1c" class="navigation_box" @change="handleTabChange">
+        <van-tab v-for="item in navList" :key="item.cid">
+          <!-- 导航 -->
           <template #title>{{ item.title }} </template>
-          <div class="classification_label">
-            <div class="card_list">
-              <img src="./image/01.png" alt="" />
+          <!-- 列表 -->
+          <div
+            class="classification_label"
+            v-infinite-scroll="load"
+            infinite-scroll-immediate="false"
+          >
+            <div class="card_list" v-for="item in listenList" :key="item.id"  @click="goDetail(item.url)">
+              <img :src="item.coverPathSmall" alt="" />
               <div class="card_right">
                 <div class="card_right_top">
-                  畅销书上新推荐第13期，这些书值得听
+                  {{ item.title }}
                 </div>
                 <div class="card_right_bottom">
-                  <van-icon name="setting-o" /> 33&nbsp;&nbsp;&nbsp;&nbsp;
-                  2121-2-23更新
+                  <van-icon name="setting-o" />{{
+                    item.pageView
+                  }}&nbsp;&nbsp;&nbsp;&nbsp; 2121-2-23更新
                 </div>
               </div>
+            </div>
+            <div v-if="loading" class="loading">
+              <Loading
+                color="#fa3c18"
+                size="30"
+                text-size="16"
+                text-color="#fa3c18"
+                >加载中</Loading
+              >
             </div>
           </div>
         </van-tab>
@@ -38,7 +56,8 @@
       </div>
       <div class="box2" v-show="isPoll">
         <div class="box2_word">请选分类</div>
-        <button class="btn" v-for="item in navList" :key="item.cid">
+        <button class="btn" v-for="(item,index) in navList" :key="item.cid"
+        @click="onCategoryClick(item,index)"   v-show="isPoll" >
           {{ item.title }}
         </button>
       </div>
@@ -47,6 +66,7 @@
 </template>
 
 <script lang="ts">
+import JgsHead from "../../components/JgsHead/index.vue";
 import { defineComponent, ref, onMounted } from "vue";
 import listenApi from "../../api/listening";
 export default defineComponent({
@@ -55,6 +75,7 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
+// 点击标题
 const active = ref(0);
 const isPoll = ref<boolean>(false);
 
@@ -66,60 +87,132 @@ const pageNum = ref(1);
 const pageSize = ref(7);
 // 存储数据总条数
 const total = ref();
-// 下拉
+
+const { getNavData, getListenList } = listenApi;
+// 导航下拉
 const asd = () => {
   return (isPoll.value = true);
 };
 const bbb = () => {
-  return (isPoll.value = false);
+isPoll.value = false
 };
 
-const navList = ref<{ [paramsName: string]: any }[]>([]);
+const loading = ref(true);
 
 // 获取听单下的分类列表
-async function getNavData() {
-  const result = await listenApi.getNavData();
+const navList = ref<{ cid: string; title: string; }[]>([]);
 
+
+
+async function NavData() {
+  const result = await getNavData() as any;
   navList.value = result.categories;
+  
 }
 
-const listenList = ref<{ [paramsName: string]: any }[]>([]);
+
 
 // 分类列表
+const listenList = ref<{ [paramsName: string]: any }[]>([]);
 async function ListenList() {
-  const result = await listenApi.getListenList(
+  loading.value = true;
+  const result = await getListenList(
     title.value,
     pageNum.value,
     pageSize.value
-  );
-  listenList.value = result.data.subjects;
+  ) as any;
+  listenList.value = [...listenList.value, ...result.subjects];
   total.value = result.totalCount;
+  loading.value = false;
 }
-console.log(total.value);
+
+// 当标签页变化时触发
+const handleTabChange = (index: number) => {
+  // 更新title为当前选中的分类标题
+  title.value = navList.value[index].name ;
+  // 重置页码和列表
+  // pageNum.value = 1;
+  listenList.value = [];
+  isPoll.value = false
+  // 重新获取列表数据
+  ListenList();
+ 
+};
+
+
+
+// 处理分类按钮点击事件
+const onCategoryClick = (category: { cid: string; title: string  },index) => {
+  // 更新title为当前选中的分类标题
+title.value = category.name ;
+  // 重置页码和列表
+  pageNum.value = 1;
+  listenList.value = [];
+
+  isPoll.value=false
+  // 重新获取列表数据
+  ListenList();
+  active.value=index
+  
+};
+
+
+
+// 点击跳转去详情页
+const goDetail = (url) => {
+  window.location.href = 'https://m.ximalaya.com/revision/subject/category' + url
+};
+
+// 下拉触底
+const load = () => {
+  pageNum.value += 1;
+  ListenList();
+};
+
+
+
 
 onMounted(() => {
-  getNavData();
+  NavData();
   ListenList();
+
 });
 </script>
 
 <style lang="less" scoped>
 .zbc_category_sort {
+
+
   .navigation {
     position: relative;
+
+    // 标题
+    .navigation_box{
+      width: 325px;
+      height: 45px;
+      z-index: 1;
+      top: 0;
+      left: 0;
+     
+    }
+    // 下拉列表
     .box1 {
-      border: solid 1px #e7e6e6;
-      width: 42px;
-      height: 43px;
+      
+      border-left: solid 1px #ebebeb;
+      border-bottom: solid 1px #ebebeb;
+      width: 45px;
+      height: 39px;
       background: #fff;
       position: absolute;
-      top: 0;
-      right: -1px;
+      top: 8px;
+      right: 2px;
+      // 展开折叠
       .drop_down {
-        margin-left: 9px;
-        line-height: 42px;
+        width: 8px;
+        margin-left: 10px;
+        line-height: 25px;
       }
-      z-index: 2;
+      z-index: 3;
     }
 
     .box2 {
@@ -151,7 +244,10 @@ onMounted(() => {
       }
     }
     .classification_label {
+
       .card_list {
+      
+        width: 100%;
         margin-top: 1px;
 
         margin-bottom: 20px;
@@ -168,16 +264,25 @@ onMounted(() => {
           width: 279px;
           height: 73px;
           padding-left: 20px;
+          display: flex;
+          flex-direction: column;
           .card_right_top {
             font-size: 18px;
             font-weight: 600;
           }
           .card_right_bottom {
-            margin-top: 18px;
+            margin-top: 20px;
+
             font-size: 14px;
             color: #c1c1c7;
+           line-height: 40px;
           }
         }
+      }
+      .loading {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
       }
     }
   }

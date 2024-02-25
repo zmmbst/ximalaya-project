@@ -1,6 +1,7 @@
 import request from "../utils/request";
 
 
+
 export default {
   getNavData() {
     return request.get(`api/revision/subject/category`)
