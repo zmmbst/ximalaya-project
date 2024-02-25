@@ -1,11 +1,11 @@
 <template>
     <div class="video-details">
         <div class="top">
-            <image class="top-tupian" src="//imagev2.xmcdn.com/storages/95aa-audiofreehighqps/38/EA/GMCoOSII_TADAAUsMQJq2bC0.jpeg!op_type=3&columns=144&rows=144"></image>
+            <image class="top-tupian" src="//imagev2.xmcdn.com/storages/8224-audiofreehighqps/1C/33/GMCoOSQJl-CBAABzZAKlrTvn.jpg!op_type=5&device_type=ios&name=web_meduim&upload_type=cover&magick=webp"></image>
 
             <div class="album-content">
                 <div class="top-biaoti">美味童话｜汉堡王子1·膳食宝塔｜下饭故事</div>
-            <a class="album-author" href="">
+            <a class="album-author" href="#">
                 <img class="top-touxiang" src="//imagev2.xmcdn.com/storages/8224-audiofreehighqps/1C/33/GMCoOSQJl-CBAABzZAKlrTvn.jpg!op_type=5&device_type=ios&name=web_meduim&upload_type=cover&magick=webp">
                 <span class="tou-zuozhe" >超能童话镇</span>
             </a>
@@ -175,6 +175,206 @@
                         </a>
                     </div>
                 </li>
+                <li class="list-view-item">
+                    <div class="album-wrap">
+                        <a class="album-container" href="#">
+                            <div class="album-cover">
+                                <img class="img-cover" src="//imagev2.xmcdn.com/storages/8224-audiofreehighqps/1C/33/GMCoOSQJl-CBAABzZAKlrTvn.jpg!op_type=5&device_type=ios&name=web_meduim&upload_type=cover&magick=webp">
+                                <div class="album-cover-panel">
+                                    <div class="tupianwenzi">
+                                        <van-icon name="play-circle-o" />
+                                        1555万
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="album-desc">
+                                <p class="ellipsis-2">金币封印师2：故宫神兽传奇</p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="list-view-item">
+                    <div class="album-wrap">
+                        <a class="album-container" href="#">
+                            <div class="album-cover">
+                                <img class="img-cover" src="//imagev2.xmcdn.com/storages/8224-audiofreehighqps/1C/33/GMCoOSQJl-CBAABzZAKlrTvn.jpg!op_type=5&device_type=ios&name=web_meduim&upload_type=cover&magick=webp">
+                                <div class="album-cover-panel">
+                                    <div class="tupianwenzi">
+                                        <van-icon name="play-circle-o" />
+                                        1555万
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="album-desc">
+                                <p class="ellipsis-2">金币封印师2：故宫神兽传奇</p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="list-view-item">
+                    <div class="album-wrap">
+                        <a class="album-container" href="#">
+                            <div class="album-cover">
+                                <img class="img-cover" src="//imagev2.xmcdn.com/storages/8224-audiofreehighqps/1C/33/GMCoOSQJl-CBAABzZAKlrTvn.jpg!op_type=5&device_type=ios&name=web_meduim&upload_type=cover&magick=webp">
+                                <div class="album-cover-panel">
+                                    <div class="tupianwenzi">
+                                        <van-icon name="play-circle-o" />
+                                        1555万
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="album-desc">
+                                <p class="ellipsis-2">金币封印师2：故宫神兽传奇</p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="list-view-item">
+                    <div class="album-wrap">
+                        <a class="album-container" href="#">
+                            <div class="album-cover">
+                                <img class="img-cover" src="//imagev2.xmcdn.com/storages/8224-audiofreehighqps/1C/33/GMCoOSQJl-CBAABzZAKlrTvn.jpg!op_type=5&device_type=ios&name=web_meduim&upload_type=cover&magick=webp">
+                                <div class="album-cover-panel">
+                                    <div class="tupianwenzi">
+                                        <van-icon name="play-circle-o" />
+                                        1555万
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="album-desc">
+                                <p class="ellipsis-2">金币封印师2：故宫神兽传奇</p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                <li class="list-view-item">
+                    <div class="album-wrap">
+                        <a class="album-container" href="#">
+                            <div class="album-cover">
+                                <img class="img-cover" src="//imagev2.xmcdn.com/storages/8224-audiofreehighqps/1C/33/GMCoOSQJl-CBAABzZAKlrTvn.jpg!op_type=5&device_type=ios&name=web_meduim&upload_type=cover&magick=webp">
+                                <div class="album-cover-panel">
+                                    <div class="tupianwenzi">
+                                        <van-icon name="play-circle-o" />
+                                        1555万
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="album-desc">
+                                <p class="ellipsis-2">金币封印师2：故宫神兽传奇</p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <div class="list-view-footer">
+                <div class="go-next-container">
+                    <div class="go-next">
+                        <van-icon class="xm-icon" name="replay" />
+                        <span class="v-m">换一批</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 相关推荐 -->
+
+        <div class="xm-list">
+            <div class="list-view-header">
+                <div class="list-view-title">相关推荐</div>
+                <div class="word-list-container">
+                    <div class="word-list-inline">
+                        <a class="Z-Z" href="#">
+                            <span class="Z-Z">儿童英文蔬菜歌单</span>
+                        </a>
+                        <a class="Z-Z" href="#">
+                            <span class="Z-Z">儿童英文蔬菜歌单</span>
+                        </a>
+                        <a class="Z-Z" href="#">
+                            <span class="Z-Z">儿童英文蔬菜歌单</span>
+                        </a>
+                        <a class="Z-Z" href="#">
+                            <span class="Z-Z">儿童英文蔬菜歌单</span>
+                        </a>
+                        <a class="Z-Z" href="#">
+                            <span class="Z-Z">儿童英文蔬菜歌单</span>
+                        </a>
+                        <a class="Z-Z" href="#">
+                            <span class="Z-Z">儿童英文蔬菜歌单</span>
+                        </a>
+                        <a class="Z-Z" href="#">
+                            <span class="Z-Z">儿童英文蔬菜歌单</span>
+                        </a>
+                        <a class="Z-Z" href="#">
+                            <span class="Z-Z">儿童英文蔬菜歌单</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="list-view-body">
+                <li class="list-view-item">
+                    <a href="#">
+                        <div class="xm-album">
+                            <div class="xm-album-cover">
+                                <img class="cover-image" src="//imagev2.xmcdn.com/storages/8224-audiofreehighqps/1C/33/GMCoOSQJl-CBAABzZAKlrTvn.jpg!op_type=5&device_type=ios&name=web_meduim&upload_type=cover&magick=webp">
+
+                            </div>
+                            <div class="content-QQ">
+                                <div class="QQ">
+                                    <h3 class="xm-album">
+                                        王子和贫儿
+                                    </h3>
+                                    <p class="xm-album-subtitle">《王子与贫儿》以16世纪的英国为背景，描写了王子和贫儿互换身份的童话式故事。一个阴差阳错的偶然机会，长相相同的王子爱德华和贫儿汤姆因互换衣服，从而导致了命运的颠...</p>
+                                    <div class="xm-album-info">
+                                        <span class="count-XX">
+                                            <van-icon class="xm-icon" name="play" />
+                                            1111
+                                        </span>
+                                        <span class="count-XX">
+                                            <van-icon class="xm-icon" name="service" />
+                                            8
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </a>
+                </li>
+                <li class="list-view-item">
+                    <a href="#">
+                        <div class="xm-album">
+                            <div class="xm-album-cover">
+                                <img class="cover-image" src="//imagev2.xmcdn.com/storages/8224-audiofreehighqps/1C/33/GMCoOSQJl-CBAABzZAKlrTvn.jpg!op_type=5&device_type=ios&name=web_meduim&upload_type=cover&magick=webp">
+
+                            </div>
+                            <div class="content-QQ">
+                                <div class="QQ">
+                                    <h3 class="xm-album">
+                                        王子和贫儿
+                                    </h3>
+                                    <p class="xm-album-subtitle">《王子与贫儿》以16世纪的英国为背景，描写了王子和贫儿互换身份的童话式故事。一个阴差阳错的偶然机会，长相相同的王子爱德华和贫儿汤姆因互换衣服，从而导致了命运的颠...</p>
+                                    <div class="xm-album-info">
+                                        <span class="count-XX">
+                                            <van-icon class="xm-icon" name="play" />
+                                            1111
+                                        </span>
+                                        <span class="count-XX">
+                                            <van-icon class="xm-icon" name="service" />
+                                            8
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </a>
+                </li>
             </ul>
         </div>
 
@@ -183,16 +383,27 @@
   </template>
   
   <script lang="ts">
-  import { defineComponent } from "vue";
+  import { defineComponent} from "vue";
   export default defineComponent({
     name: "video-details",
   });
   </script>
   <script setup lang="ts">
 
+//   import { ref,onMounted } from "vue";
+//   import getheadDetails from '../../api/coursedetails';
 
 
+//   const getheadDetailsList=async()=>{
+//     try {
+        
+//     } catch (error) {
+        
+//     }
+//   }
+// onMounted(()=>{
 
+// })
 </script>
   
   <style scoped lang="less">
@@ -500,8 +711,10 @@
             }
         }
         .guess-you-like-it{
-            padding: 15px 15px 22px 15px;
+            padding: 15px 15px 22px 0px;
             margin-bottom:10px ;
+            width: 345.33px;
+            height: 395.5px;
             background-color: #fff;
             .list-view-header{
                 position: relative;
@@ -511,9 +724,11 @@
                     font-weight: 700;
                     margin-bottom: 10px;
                 }
-                .list-view-body{
+                
+            }
+            .list-view-body{
                     display: flex;
-                    -webkit-box-pack: justify;
+                    // -webkit-box-pack: justify;
                     justify-content: space-between;
                     flex-wrap: wrap;
                     .list-view-item{
@@ -547,6 +762,8 @@
                                            top: 0;
                                            bottom: 0; 
                                            .tupianwenzi{
+                                           position: absolute;
+
                                             bottom: 0;
                                             left: 0;
                                             font-family: PingFangSC-Regular;
@@ -558,8 +775,154 @@
                                            }
                                         }
                                 }
+                                .album-desc{
+                                    padding: 6px 0 11px 0;
+                                    font-family: pingFangSC-Regular;
+                                    font-size: 13px;
+                                    line-height: 18px;
+                                    height: 53px;
+                                    overflow: hidden;
+                                    box-sizing: border-box;
+                                    color: #333;
+                                    letter-spacing: .34px;
+                                    .ellipsis-2{
+                                        overflow: hidden;
+                                        display: -webkit-box;
+                                        -webkit-line-clamp: 2;
+                                        text-overflow: ellipsis;
+                                        -webkit-box-orient: vertical;
+                                    }
+                                }
                             }
 
+                        }
+                    }
+                }
+            .list-view-footer{
+                overflow: hidden;
+                .go-next-container{
+                    text-align: center;
+                    .go-next{
+                        margin-top: 10px;
+                        margin-bottom: 2px;
+                        padding: 7px 10px;
+                        border-radius: 14px;
+                        font-family: PingFangSC-Medium;
+                        font-size: 0;
+                        background: red;
+                        color: #fff;
+                        display: inline-block;
+                        .xm-icon{
+                            font-size: 16px;
+                        }
+                        .v-m{
+                            font-size: 12px;
+                            line-height: 13px;
+                            // vertical-align: middle;
+                        }
+                    }
+                }
+            }
+        }
+        .xm-list{
+            padding: 15px 0 0 0;
+            background-color: #fff;
+            .list-view-header{
+                position: relative;
+                .list-view-title{
+                    font-size: 18px;
+                    font-weight: 700;
+                    line-height: 1.38;
+                }
+                .word-list-container{
+                    margin: 15px 0 5px;
+                    .word-list-inline{
+                        display:inline-block ;
+                        white-space: nowrap;
+                        width: 100%;
+                        overflow-y: scroll;
+                        .Z-Z{
+                            padding: 5px 3px;
+                            background-color: #f2f2f2;
+                            display: inline-block;
+                            border-radius: 24px;
+                            margin-right: 12px;
+                            font-size: 14px;
+                            color:#999;
+                            border: none;
+                        }
+                    }
+                }
+            }
+            .list-view-body{
+                .list-view-item{
+                    border-bottom: 1px solid #999;
+                    margin-right: 15px;
+                    a{
+                        color: #7e8c8d;
+                        .xm-album{
+                            padding: 15px 10px 15px 0;
+                            box-sizing:border-box;
+                            max-width: 100%;
+                            .xm-album-cover{
+                                width: 70px;
+                                height: 70px;
+                                float: left;
+                                padding: 0 15px 0 0;
+                                box-sizing: content-box;
+                                margin-bottom: -1px;
+                                max-height: 100%;
+                                position: relative;
+                                .cover-image{
+                                    border-radius: 4px;
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                            }
+                            .content-QQ{
+                                margin-top: -30px;
+                                display: flex;
+                                flex-flow: row-reverse;
+                                justify-content: space-between;
+                                align-items: center;
+                                overflow: hidden;
+                                .QQ{
+                                    width: 100%;
+                                    .xm-album{
+                                        color: 3333;
+                                        font-size: 16px;
+                                        line-height: 1.3;
+                                        overflow: hidden;
+                                        white-space: nowrap;
+                                        text-overflow: ellipsis;
+                                    }
+                                    .xm-album-subtitle{
+                                        margin-top: -30px;
+                                    //   margin: 5px 0 7px;
+                                    margin-left: -5px;
+                                      font-size: 13px;
+                                      line-height: 1.38;
+                                      overflow: hidden;  
+                                      white-space: nowrap;
+                                      text-overflow: ellipsis;
+                                    }
+                                    .xm-album-info{
+                                        font-size: 11px;
+                                        line-height: 1.45;
+                                        white-space: nowrap;
+                                        color: #999;
+                                        .count-XX{
+                                            margin-right: 18px;
+                                            line-height: 20px;
+                                            min-width: 55px;
+                                            vertical-align: top;
+                                            .xm-icon{
+                                                // margin-right: 5px;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
