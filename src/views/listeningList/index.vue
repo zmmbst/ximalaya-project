@@ -1,9 +1,10 @@
 <template>
   <div class="zbc_category_sort">
-    <JgsHead></JgsHead>
+    <JgsHead class="search"></JgsHead>
     <div class="navigation">
       <!-- 导航 -->
-      <van-tabs v-model:active="active" color="#fc2a1c" class="navigation_box" @change="handleTabChange">
+      <van-tabs v-model:active="active" 
+      color="#fc2a1c" class="navigation_box" @change="handleTabChange">
         <van-tab v-for="item in navList" :key="item.cid">
           <!-- 导航 -->
           <template #title>{{ item.title }} </template>
@@ -181,11 +182,18 @@ onMounted(() => {
 
 <style lang="less" scoped>
 .zbc_category_sort {
-
-
+position: relative;
+.search{
+  position: fixed;
+  z-index: 4;
+  width: 100%;
+  top: 0;
+  background-color: #fff;
+  
+}
   .navigation {
-    position: relative;
-
+    
+  margin-top:50px ;
     // 标题
     .navigation_box{
       width: 325px;
@@ -193,7 +201,12 @@ onMounted(() => {
       z-index: 1;
       top: 0;
       left: 0;
-     
+    
+   ::v-deep(.van-tabs__wrap) {
+    border-bottom:solid 1px #ebebeb;
+ position: fixed;
+ z-index: 5;
+    }
     }
     // 下拉列表
     .box1 {
@@ -201,12 +214,14 @@ onMounted(() => {
       border-left: solid 1px #ebebeb;
       border-bottom: solid 1px #ebebeb;
       width: 45px;
-      height: 39px;
+      height: 37px;
       background: #fff;
-      position: absolute;
-      top: 8px;
-      right: 2px;
+      position: fixed;
+      top: 58px;
+      right: 0;
+      z-index: 5;
       // 展开折叠
+      
       .drop_down {
         width: 8px;
         margin-left: 10px;
@@ -214,7 +229,7 @@ onMounted(() => {
       }
       z-index: 3;
     }
-
+// 下拉里边的按钮
     .box2 {
       width: 100%;
       z-index: 1;
@@ -227,7 +242,7 @@ onMounted(() => {
       position: absolute;
       top: 0;
       background-color: #fff;
-      border: solid 1px #ccc;
+      // border: solid 1px #ccc;
       .btn {
         font-size: 16px;
         color: black;
@@ -240,42 +255,45 @@ onMounted(() => {
         margin: 8px;
         line-height: 32px;
         border-radius: 5px;
-        border: solid 1px #fff;
+        border: 0;
+      
       }
     }
+    // 列表
     .classification_label {
-
+      border-top: solid 1px #e7e6e6;
+     margin-left: 16px;
+     margin-top: 40px;
+    //  列表每一项
       .card_list {
-      
-        width: 100%;
-        margin-top: 1px;
-
-        margin-bottom: 20px;
-
-        padding: 0 20px;
+        width: 330px;
+        height: 80px;
+     
+        margin-bottom: -30px;
+        display: flex;
         padding-top: 13px;
-        border-top: solid 0.5px #e7e6e6;
+        border-bottom: solid 1px #ebe7e7;
+        margin-top: 40px;
         img {
           width: 85px;
+          margin-bottom: 2px;
         }
-        display: flex;
-
         .card_right {
           width: 279px;
-          height: 73px;
+          height: 90px;
           padding-left: 20px;
           display: flex;
           flex-direction: column;
+          justify-content: space-around;
           .card_right_top {
             font-size: 18px;
             font-weight: 600;
           }
           .card_right_bottom {
-            margin-top: 20px;
-
             font-size: 14px;
             color: #c1c1c7;
            line-height: 40px;
+
           }
         }
       }
