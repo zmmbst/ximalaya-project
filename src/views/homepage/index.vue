@@ -1,13 +1,21 @@
 <template>
   <div class="container">
-    <div class="home_top">
-      <div class="leftimg">
-        <img src="./images//logo.png" alt="" />
+    <div class="fixedTop">
+      <div class="home_top">
+        <div class="leftimg">
+          <img src="./images//logo.png" alt="" />
+        </div>
+        <div class="rightbtn">打开APP</div>
       </div>
-      <div class="rightbtn">打开APP</div>
+      <!-- 搜索框 -->
+      <van-search
+        class="search"
+        shape="round"
+        value="{{ value }}"
+        placeholder="搜索"
+      />
     </div>
-    <!-- 搜索框 -->
-    <van-search shape="round" value="{{ value }}" placeholder="搜索" />
+    <div class="empty"></div>
     <!-- 轮播图 -->
     <el-carousel
       :interval="2000"
@@ -16,8 +24,8 @@
       indicator-position="none"
     >
       <el-carousel-item v-for="item in 6" :key="item">
-        <h3 text="2xl" justify="center">{{ item }}</h3>
-      </el-carousel-item>
+          <img src="./images/swiper1.jpg" alt="">
+       </el-carousel-item> 
     </el-carousel>
     <!-- 三个图标 -->
     <div class="home_center">
@@ -43,130 +51,110 @@
     <div class="newbie">新人必听</div>
     <!-- 新人必听列表 -->
     <div class="newbieList">
-      <div class="listSon">
-        <img src="./images/dog.jpg" />
+      <div class="listSon" v-for="item in newbieStore.newbieList.albums" :key="item.albumId">
+        <img :src="'https://imagev2.xmcdn.com/'+item.albumCoverPath"/>
         <van-icon class="go" name="play-circle-o" />
-        <span>1.18亿</span>
-        <p>农门婆婆的诰命之路(古言穿书种田)</p>
-      </div>
-      <div class="listSon">
-        <img src="./images/dog.jpg" />
-        <van-icon class="go" name="play-circle-o" />
-        <span>1.18亿</span>
-        <p>农门婆婆的诰命之路(古言穿书种田)</p>
-      </div>
-      <div class="listSon">
-        <img src="./images/dog.jpg" />
-        <van-icon class="go" name="play-circle-o" />
-        <span>1.18亿</span>
-        <p>农门婆婆的诰命之路(古言穿书种田)</p>
-      </div>
-      <div class="listSon">
-        <img src="./images/dog.jpg" />
-        <van-icon class="go" name="play-circle-o" />
-        <span>1.18亿</span>
-        <p>农门婆婆的诰命之路(古言穿书种田)</p>
-      </div>
-      <div class="listSon">
-        <img src="./images/dog.jpg" />
-        <van-icon class="go" name="play-circle-o" />
-        <span>1.18亿</span>
-        <p>农门婆婆的诰命之路(古言穿书种田)</p>
-      </div>
-      <div class="listSon">
-        <img src="./images/dog.jpg" />
-        <van-icon class="go" name="play-circle-o" />
-        <span>1.18亿</span>
-        <p>农门婆婆的诰命之路(古言穿书种田)</p>
+        <span>{{ item.albumPlayCount }}</span>
+        <p>{{ item.albumTitle }}</p>
       </div>
     </div>
     <!-- 限时免费 -->
     <div class="free">
       <div class="freetime">限时免费</div>
-      <span class="timing">59</span>: <span class="timing">59</span>:
-      <span class="timing">59</span>
+      <van-count-down :time="time" />
     </div>
     <!-- 限时免费列表 -->
     <el-scrollbar ref="refScrollbar" @wheel.prevent="handleScroll">
       <div class="ct-scrollbar">
-        <div class="freeList">
-          <img src="./images/pinkdog.jpg" alt="" />
+        <div class="freetimeList" v-for="item in freeStore.freeList.limitedFreeAlbum?.limitedTimeFreeAlbums" :key="item.id">
+          <img :src="item.coverPath"/>
           <van-icon class="go" name="play-circle-o" />
-          <span>1.18亿</span>
+          <span>{{ item.playCount }}</span>
           <p>
-            一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
-          </p>
-        </div>
-        <div class="freeList">
-          <img src="./images/pinkdog.jpg" alt="" />
-          <van-icon class="go" name="play-circle-o" />
-          <span>1.18亿</span>
-          <p>
-            一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
-          </p>
-        </div>
-        <div class="freeList">
-          <img src="./images/pinkdog.jpg" alt="" />
-          <van-icon class="go" name="play-circle-o" />
-          <span>1.18亿</span>
-          <p>
-            一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
-          </p>
-        </div>
-        <div class="freeList">
-          <img src="./images/pinkdog.jpg" alt="" />
-          <van-icon class="go" name="play-circle-o" />
-          <span>1.18亿</span>
-          <p>
-            一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
-          </p>
-        </div>
-        <div class="freeList">
-          <img src="./images/pinkdog.jpg" alt="" />
-          <van-icon class="go" name="play-circle-o" />
-          <span>1.18亿</span>
-          <p>
-            一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
-          </p>
-        </div>
-        <div class="freeList">
-          <img src="./images/pinkdog.jpg" alt="" />
-          <van-icon class="go" name="play-circle-o" />
-          <span>1.18亿</span>
-          <p>
-            一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
-          </p>
-        </div>
-        <div class="freeList">
-          <img src="./images/pinkdog.jpg" alt="" />
-          <van-icon class="go" name="play-circle-o" />
-          <span>1.18亿</span>
-          <p>
-            一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
-          </p>
-        </div>
-        <div class="freeList">
-          <img src="./images/pinkdog.jpg" alt="" />
-          <van-icon class="go" name="play-circle-o" />
-          <span>1.18亿</span>
-          <p>
-            一人一驴一狗去修仙 | 爆笑无厘头 | 玄幻修仙 | 有声的紫襟多人有声剧
+            {{ item.title }}
           </p>
         </div>
       </div>
     </el-scrollbar>
     <!-- 今日热点 -->
     <div class="todayHot">今日热点</div>
+    <!-- 今日热点列表 -->
+    <div class="hotList">
+      <div class="hotSon" v-for="item in freeStore.freeList.hotTrack?.hotTracks" :key="item.trackId">
+        <div class="imgs">
+          <img :src="item.albumCoverPath" alt="" />
+          <van-icon class="go" name="play-circle-o" />
+        </div>
+        <div class="hotInfo">
+          <h4 class="infoTop">
+            {{ item.title }}
+          </h4>
+          <div class="infoBottom">
+            <div class="bottomAdd">
+              <van-icon class="manager" name="manager-o" />
+              <p>新京报</p>
+            </div>
+            <div class="bottomListen">
+              <van-icon class="service" name="service-o" />
+              <p>{{ item.playCount }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 博客推荐 -->
+    <div class="recommend">播客推荐</div>
+    <!-- 播客推荐列表 -->
+    <div class="recommendList">
+      <div class="recommendSon" v-for="item in newbieStore.newbieList.albums" :key="item.albumId">
+        <div class="imgs">
+          <img :src="'https://imagev2.xmcdn.com/'+item.albumCoverPath"/>
+          <van-icon class="go" name="play-circle-o" />
+        </div>
+        <div class="recommendInfo">
+          <h4 class="infoTop">
+            {{ item.albumTitle}}
+          </h4>
+          <div class="infoBottom">
+            <div class="bottomAdd">
+              <van-icon class="manager" name="manager-o" />
+              <p>余华</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 结束底部 -->
+    <div class="footer">
+      <img src="./images/logo.png" alt="" />
+      <p>© 2014-
+        2024
+        喜马拉雅 版权所有
+      </p>
+    </div>
   </div>
 </template>
   
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
+// import {cx_GetNewbieData,cx_GetFreetimeData} from '../../api/homepage'
 export default defineComponent({
   name: "homepage",
 });
 </script>
 <script setup lang="ts">
+import {ref,onMounted} from "vue";
+import {useNewbieStore,useFreeStore} from "../../stores/homepage";
+const newbieStore = useNewbieStore();
+const freeStore = useFreeStore();
+const time = ref(30 * 60 * 60 * 1000);
+
+
+// 挂载完成获取新人必听列表
+onMounted(()=>{
+  newbieStore.getnewbieList();
+  freeStore.getfreetimeList();
+})
 const refScrollbar = ref(null);
 const handleScroll = (e: any) => {
   const wheelDelta = e.wheelDelta || -e.deltaY * 40;
@@ -181,34 +169,43 @@ const handleScroll = (e: any) => {
 .container {
   width: 385px;
   height: 100%;
-  .home_top {
-    // overflow: scroll;
-    width: 350px;
-    height: 30px;
-    padding: 15px 15px 5px;
-    margin: 0px auto;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: space-between;
-    .leftimg {
-      width: 120px;
+  .fixedTop {
+    width: 386px;
+    background-color: white;
+    position: fixed;
+    z-index: 999;
+    .home_top {
+      // overflow: scroll;
+      width: 350px;
       height: 30px;
-      img {
-        width: 100%;
+      padding: 15px 15px 5px;
+      margin: 0px auto;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: space-between;
+      .leftimg {
+        width: 120px;
         height: 30px;
+        img {
+          width: 100%;
+          height: 30px;
+        }
+      }
+      .rightbtn {
+        width: 76px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: white;
+        font-size: 12px;
+        border-radius: 50px;
+        background-color: red;
       }
     }
-    .rightbtn {
-      width: 76px;
-      height: 30px;
-      line-height: 30px;
-      text-align: center;
-      color: white;
-      font-size: 12px;
-      border-radius: 50px;
-      background-color: red;
-    }
+  }
+  .empty {
+    height: 105px;
   }
   .home_center {
     margin: 25px 0px 0px;
@@ -325,19 +322,10 @@ const handleScroll = (e: any) => {
       font-weight: 700;
       margin-right: 15px;
     }
-    .timing {
-      width: 20px;
-      height: 24px;
-      line-height: 24px;
-      text-align: center;
-      color: white;
-      font-size: 16px;
-      background-color: red;
-    }
   }
   .ct-scrollbar {
     display: flex;
-    .freeList {
+    .freetimeList {
       position: relative;
       margin-right: 10px;
       img {
@@ -380,12 +368,178 @@ const handleScroll = (e: any) => {
     margin: 17px 0 17px 15px;
     font-weight: 700;
   }
-  .el-carousel__item h3 {
-    color: #475669;
-    opacity: 0.75;
-    line-height: 200px;
-    margin: 0;
-    text-align: center;
+  .hotList {
+    .hotSon {
+      padding: 10px;
+      padding-top: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .imgs {
+        position: relative;
+        img {
+          margin-right: 25px;
+          width: 70px;
+          height: 70px;
+          border-radius: 5px;
+        }
+        .go {
+          top: 0px;
+          left: 0px;
+          width: 70px;
+          height: 70px;
+          line-height: 70px;
+          text-align: center;
+          position: absolute;
+        }
+      }
+      .hotInfo {
+        height: 75px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .infoTop {
+          margin: 0px;
+          font-size: 14px;
+          color: #40404c;
+        }
+        .infoBottom {
+          display: flex;
+          margin-bottom: 10px;
+          .bottomAdd {
+            display: flex;
+            .manager {
+              font-size: 15px;
+              color: #999;
+              margin-right: 5px;
+            }
+            p {
+              font-size: 12px;
+              color: #999;
+              margin: 0px;
+              margin-right: 20px;
+            }
+          }
+          .bottomListen {
+            display: flex;
+            .service {
+              font-size: 15px;
+              color: #999;
+              margin-right: 5px;
+            }
+            p {
+              font-size: 12px;
+              color: #999;
+              margin: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .recommend {
+    font-size: 18px;
+    color: #40404c;
+    line-height: 25px;
+    margin: 17px 0 17px 15px;
+    font-weight: 700;
+  }
+  .recommendList {
+    .recommendSon {
+      padding: 10px;
+      padding-top: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .imgs {
+        position: relative;
+        img {
+          margin-right: 25px;
+          width: 70px;
+          height: 70px;
+          border-radius: 5px;
+        }
+        .go {
+          color: #40404c;
+          top: 0px;
+          left: 0px;
+          width: 70px;
+          height: 70px;
+          line-height: 70px;
+          text-align: center;
+          position: absolute;
+        }
+      }
+      .recommendInfo {
+        height: 75px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .infoTop {
+          margin: 0px;
+          font-size: 14px;
+          color: #40404c;
+        }
+        .infoBottom {
+          display: flex;
+          margin-bottom: 10px;
+          .bottomAdd {
+            display: flex;
+            .manager {
+              font-size: 15px;
+              color: #999;
+              margin-right: 5px;
+            }
+            p {
+              font-size: 12px;
+              color: #999;
+              margin: 0px;
+              margin-right: 20px;
+            }
+          }
+          .bottomListen {
+            display: flex;
+            .service {
+              font-size: 15px;
+              color: #999;
+              margin-right: 5px;
+            }
+            p {
+              font-size: 12px;
+              color: #999;
+              margin: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .footer {
+    width: 385px;
+    height: 180px;
+    background-image: url("./images/bottomimg.jpg");
+    background-repeat: no-repeat; /* 不重复背景图片 */
+    background-size: cover; /* 背景图片覆盖整个元素 */
+    background-position-y: -75px; /* 背景图片居中显示 */
+    img {
+      width: 120px;
+      height: 30px;
+      display: block; /* 将图片从内联元素转换为块级元素 */
+      margin-left: auto; /* 设置左边距为自动 */
+      margin-right: auto; /* 设置右边距为自动 */
+      margin-top: 34px;
+    }
+    p{
+      color: #808080;
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+  .el-carousel__item img {
+    width: 100%;
+    height: 100%;
   }
 
   .el-carousel__item:nth-child(2n) {
