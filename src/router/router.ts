@@ -30,7 +30,7 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: "/video-details",
+    path: "/video-details/:id",
     name: "video-details",
     component: () => import("../views/video-details/index.vue"),
     meta: {
@@ -50,7 +50,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const router = createRouter({
-  history,
+  history:createWebHistory(),
   scrollBehavior: () => ({ top: 0 }),
   routes,
 });
