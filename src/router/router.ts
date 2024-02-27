@@ -45,7 +45,22 @@ const routes: RouteRecordRaw[] = [
     meta: {
       hidden: true,
     },
-    
+  }, 
+  {
+    path: "/searchinfo",
+    name: "searchinfo",
+    component: () => import("../views/search-info/index.vue"),
+    meta: {
+      hidden: true,
+    },
+  }, 
+  {
+    path: "/sortinfo",
+    name: "sortinfo",
+    component: () => import("../views/sort-info/index.vue"),
+    meta: {
+      hidden: true,
+    },
   }, 
 ];
 

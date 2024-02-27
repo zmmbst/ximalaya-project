@@ -38,7 +38,7 @@ import { defineComponent, ref } from "vue";
 export default defineComponent({
   name: "JgsSearch",
   setup() {
-    const show = ref(true);
+    const show = ref(false);
     const showPopup = () => {
       show.value = true;
     };

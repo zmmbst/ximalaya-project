@@ -1,265 +1,271 @@
 <template>
-  <div class="switch-Box">
-    <div class="switch-left" ref="left">
-      <div
-        v-for="(item, index) in sortStore.categoryList"
-        :key="item.id"
-        @touchstart="fnS(index)"
-        :class="index === num.setnum ? 'ac' : ''"
-      >
-        <a href="#">
-          {{ item.title }}
-        </a>
-      </div>
-    </div>
-    <div
-      class="switch-right"
-      ref="right"
-      @scroll="fnScroll"
-      @touchstart="overFn"
-    >
-      <div
-        class="category2"
-        v-for="(list, index) in sortStore.categoryList"
-        :key="index"
-      >
-        <!-- <div> -->
-        <div class="category2-title border">
-          <a :class="index === num.setnum ? 'bc' : ''" href="#">
-            {{ list.title }}
-          </a>
-          <van-icon name="arrow" />
-        </div>
-        <div class="categoty2-list">
-          <a
-            v-for="item in list.subCategories[0]?.metadataValues"
+  <JgsHead></JgsHead>
+  <JgsSearch></JgsSearch>
+  <div class="category-container">
+    <div class="category-box">
+      <div class="wrap-container" ref="wrapper">
+        <ul ref="ul">
+          <li
+            v-for="(item, index) in sortStore.categoryList"
             :key="item.id"
-            class="categoty2-item"
-            href="#"
+            @click="changeFirstCategory(item, index, $event)"
+            :class="index === leftIndex ? 'active item' : 'item'"
           >
-            <span>{{ item.name }}</span>
-          </a>
-          <!-- </div> -->
+            {{ item.title }}
+          </li>
+        </ul>
+      </div>
+      <div class="content" ref="content">
+        <div @click="getSortInfo" ref="rightScrollContainer">
+          <div
+            v-for="(item, index) in sortStore.categoryList"
+            :key="item.id"
+            class="content-item"
+          >
+            <div
+              class="title"
+              :data-categoryId="item.id"
+              :data-metadataTitle="item.title"
+              :data-metadataName="''"
+            >
+              <span
+                :data-categoryId="item.id"
+                :data-metadataTitle="item.title"
+                :data-metadataName="''"
+                :class="index === leftIndex ? 'checkitem' : ''"
+              >
+                {{ item.title }}
+              </span>
+              <van-icon
+                :data-categoryId="item.id"
+                :data-metadataTitle="item.title"
+                :data-metadataName="''"
+                name="arrow"
+              ></van-icon>
+            </div>
+            <ul class="title-body">
+              <li
+                v-for="subItem in item.subCategories[0]?.metadataValues"
+                :key="subItem.id"
+                :data-categoryId="item.id"
+                :data-metadataTitle="item.title"
+                :data-metadataName="subItem.displayName"
+              >
+                {{ subItem.displayName }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { onMounted, reactive, ref } from "vue";
+<script setup lang="ts">
+import { defineOptions, ref, onMounted, watch } from "vue";
+import BScroll from "@better-scroll/core";
 import { useSortStore } from "../../stores/sort";
-
-const sortStore = useSortStore();
-let num = reactive({ setnum: 0, setflag: true });
-let left = ref<HTMLDivElement | null>(null);
-let getleft = () => left.value as HTMLDivElement;
-let right = ref<HTMLDivElement | null>(null);
-let getright = () => right.value as HTMLDivElement;
-let rightnum: number = 0;
-
-onMounted(async () => {
-  await sortStore.getCategoryList();
-  rightnum = (getright().children[0] as HTMLDivElement).offsetHeight;
+import MouseWheel from "@better-scroll/mouse-wheel";
+import JgsHead from "../../components/JgsHead/index.vue";
+import JgsSearch from "../../components/JgsSearch/index.vue";
+import router from "../../router/router";
+BScroll.use(MouseWheel);
+defineOptions({
+  name: "Category",
 });
-const fnS = (index: number) => {
-  num.setnum = index;
-  num.setflag = false;
-  getright().scrollTop = index * rightnum;
-  getleft().scrollTop = index > 4 ? (index - 3) * 93 : 0;
+const sortStore = useSortStore();
+const wrapper = ref<HTMLElement | null>(null);
+const ul = ref<HTMLElement | null>(null);
+const content = ref<HTMLElement | null>(null);
+let rightScroll: BScroll;
+let leftScroll: BScroll;
+const scrollY = ref<number>(0);
+const leftIndex = ref<number>(0);
+onMounted(async () => {
+  leftScroll = new BScroll(wrapper.value as HTMLElement, {
+    click: true,
+    probeType: 1,
+    bounce: false,
+    mouseWheel: {
+      speed: 20,
+      invert: false,
+      easeTime: 300,
+    },
+  });
+  rightScroll = new BScroll(content.value as HTMLElement, {
+    click: true,
+    probeType: 1,
+    scrollY: true,
+    bounce: false,
+    momentum: false,
+    mouseWheel: {
+      speed: 20,
+      invert: false,
+      easeTime: 300,
+    },
+  });
+  rightScroll.on("scroll", (position: { y: number }) => {
+    scrollY.value = Math.abs(Math.round(position.y));
+    leftIndex.value = currentIndex();
+  });
+  rightScroll.on("mousewheelMove", (position: { y: number }) => {
+    scrollY.value = Math.abs(Math.round(position.y));
+    leftIndex.value = currentIndex();
+  });
+  await sortStore.getCategoryList();
+  calculateHeight();
+  leftScroll.refresh();
+  rightScroll.refresh();
+});
+watch(leftIndex, () => {
+  leftScroll.scrollBy(
+    0,
+    -(ul.value as HTMLElement).children[leftIndex.value].getBoundingClientRect()
+      .top,
+    100,
+    undefined
+  );
+  leftScroll.refresh();
+});
+const currentId = ref<number>(0);
+const rightScrollContainer = ref<HTMLElement | null>(null);
+const changeFirstCategory = function (
+  item: { [paramname: string]: any },
+  index: number,
+  ev: any
+) {
+  if (ev._constructed) {
+    currentId.value = item.id;
+    leftIndex.value = index;
+    rightScroll.scrollBy(
+      0,
+      -(rightScrollContainer.value as HTMLElement).children[
+        index
+      ].getBoundingClientRect().top,
+      100,
+      undefined
+    );
+    rightScroll.refresh();
+  }
 };
-const fnScroll = () => {
-  if (num.setflag === false) return false;
-  let Index = Math.trunc(getright().scrollTop / rightnum + 0.01);
-  num.setnum = Index;
-  getleft().scrollTop = Index > 4 ? (Index - 3) * 93 : 0;
+const rightLiHeightArray = ref<Array<number>>([]);
+const calculateHeight = function () {
+  let lis = (rightScrollContainer.value as HTMLElement).children;
+  let height = 0;
+  rightLiHeightArray.value.push(height);
+  Array.from(lis).forEach((li) => {
+    height += li.clientHeight;
+    rightLiHeightArray.value.push(height);
+  });
 };
-
-const overFn = () => (num.setflag = true);
+const currentIndex = function () {
+  let index = rightLiHeightArray.value.findIndex((_, index) => {
+    return (
+      scrollY.value >= rightLiHeightArray.value[index] &&
+      scrollY.value < rightLiHeightArray.value[index + 1]
+    );
+  });
+  return index;
+};
+const getSortInfo = (e: any) => {
+  const {
+    categoryid: categoryId,
+    metadatatitle: metadataTitle,
+    metadataname: metadataName,
+  } = e.target.dataset;
+  router.push({
+    path: "/sortinfo",
+    query: { categoryId, metadataTitle, metadataName },
+  });
+};
 </script>
 
-<style scoped lang="less">
-a {
-  color: #72727b;
-}
-.switch-Box {
-  width: 100vw;
+<style scoped>
+.category-container {
+  width: 100%;
   height: 100vh;
+}
+
+.category-box {
   display: flex;
-  overflow: hidden;
+  height: 100vh;
+}
+
+.wrap-container {
+  height: 100vh;
+  width: 90px;
+}
+
+li.item {
+  display: flex;
+  align-items: center;
+  width: 90px;
+  height: 50px;
+  justify-content: center;
+  padding: 15px 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid #d7d7d7;
   font-size: 14px;
+  color: #72727b;
+  position: relative;
+}
 
-  .switch-left::-webkit-scrollbar {
-    display: none;
-  }
+li.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background-color: #f86442;
+}
 
-  .switch-left {
-    width: 25vw;
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    > div {
-      width: 100%;
-      height: (100vh / 13);
-      text-align: center;
-      line-height: (100vh / 13);
-      border-bottom: 0.5px solid #eee;
-      box-sizing: border-box;
-    }
-  }
+li:last-child {
+  border-bottom: 0;
+}
 
-  .switch-right::-webkit-scrollbar {
-    display: none;
-  }
+.content {
+  height: 100vh;
+  background-color: #fff;
+  flex: 1;
+  padding-left: 10px;
+}
 
-  .switch-right {
-    width: 75vw;
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    margin-left: 10px;
-    > div {
-      width: 100%;
-      border-bottom: 0.5px solid #eee;
-      font-size: 30px;
-      text-align: center;
-      color: white;
-    }
-    .category2 {
-      font-size: 14px;
-      .category2-title {
-        display: flex;
-        line-height: (100vh / 13);
-        margin: 0 15px;
-        align-items: center;
-        justify-content: space-between;
-        a {
-          font-weight: 600;
-          color: #333;
-        }
-      }
-      .categoty2-list {
-        display: flex;
-        flex-wrap: wrap;
-        line-height: (100vh / 13);
-        .categoty2-item {
-          span {
-            padding: 7.5px;
-          }
-        }
-      }
-    }
+.content-item .title {
+  color: #40404c;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 20px;
+  box-sizing: border-box;
+  height: 50px;
+  border-bottom: 0.5px solid #e8e8e8;
+  sapn {
+    flex: 1;
   }
 }
 
-.ac {
-  border-left: 5px solid #ff6702;
+.content-item .title-body {
+  font-size: 14px;
+  color: #7e8c8d;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 7.5px 0 7.5px 7.5px;
+  box-sizing: border-box;
+  border-bottom: 0.5px solid #e8e8e8;
 }
-.bc {
-  color: #ff6702 !important;
+
+.van-icon-arrow {
+  color: #a3a3ac;
+}
+
+.content-item .title-body li {
+  padding: 7.5px;
+}
+.checkitem {
+  color: #f86442 !important;
 }
 </style>
-
-<!-- <template>
-  <div className="switch-Box">
-    <div className="switch-left" ref="left">
-      <div
-        v-for="(item, index) in arr"
-        :key="index"
-        @touchstart="fnS(index)"
-        :class="index === num.setnum ? 'ac' : ''"
-      >
-        {{ item }}
-      </div>
-    </div>
-    <div
-      className="switch-right"
-      ref="right"
-      @scroll="fnScroll"
-      @touchstart="overFn"
-    >
-      <div v-for="(item, index) in arr" :key="index">{{ item }}</div>
-    </div>
-  </div>
-</template>
-
-<script lang="ts" setup>
-import { onMounted, reactive, ref } from "vue";
-const arr = ref<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-let num = reactive({ setnum: 0, setflag: true });
-let left = ref<HTMLDivElement | null>(null);
-let getleft = () => left.value as HTMLDivElement;
-let right = ref<HTMLDivElement | null>(null);
-let getright = () => right.value as HTMLDivElement;
-let rightnum: number = 0;
-onMounted(() => {
-  console.log(getright().children[0]);
-
-  rightnum = (getright().children[0] as HTMLDivElement).offsetHeight;
-});
-const fnS = (index: number) => {
-  num.setnum = index;
-  num.setflag = false;
-  getright().scrollTop = index * rightnum;
-  getleft().scrollTop = index > 4 ? (index - 3) * 93 : 0;
-};
-const fnScroll = () => {
-  if (num.setflag === false) return false;
-  let Index = Math.trunc(getright().scrollTop / rightnum + 0.01);
-  num.setnum = Index;
-  getleft().scrollTop = Index > 4 ? (Index - 3) * 93 : 0;
-};
-
-const overFn = () => (num.setflag = true);
-</script>
-
-<style lang="less">
-.switch-Box {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  overflow: hidden;
-
-  .switch-left::-webkit-scrollbar {
-    display: none;
-  }
-
-  .switch-left {
-    width: 25vw;
-    background: linear-gradient(to bottom, skyblue, pink, rebeccapurple);
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-
-    > div {
-      width: 100%;
-      height: (100vh / 8);
-      text-align: center;
-      line-height: (100vh / 8);
-      border-bottom: 0.5px solid white;
-    }
-  }
-
-  .switch-right::-webkit-scrollbar {
-    display: none;
-  }
-
-  .switch-right {
-    width: 75vw;
-    background: linear-gradient(to bottom, skyblue, pink, rebeccapurple);
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-
-    > div {
-      width: 100%;
-      height: 110vh;
-      border-bottom: 0.5px solid white;
-      font-size: 30px;
-      text-align: center;
-      line-height: 110vh;
-      color: white;
-    }
-  }
-}
-
-.ac {
-  background: linear-gradient(to bottom, pink, skyblue, powderblue);
-}
-</style> -->
