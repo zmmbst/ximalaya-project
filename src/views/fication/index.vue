@@ -15,47 +15,45 @@
     <div>
       <van-search class="search_l" value="{{ value }}" shape="round" placeholder="请输入搜索关键词" />
     </div>
-    <!-- 上方标题 -->u 
+    <!-- 上方标题 -->
     <div class="nav-bar">
-      <van-tabs>
-        <van-tab v-for="index in 6" title="标题" :key="index" class="title-active-color" />
+      <van-tabs @change="handleNavigationActive">
+        <van-tab :name="item" v-for="item in navigation" :title="item.name" :key="item.id" class="title-active-color" />
       </van-tabs>
     </div>
     <!-- 左右区域 -->
     <div class="nav-content">
       <div class="nav-left">
         <van-sidebar v-model="activeKey" class="nav-tabs">
-          <van-sidebar-item class="nav-tabs-item" title="标签名称" />
-          <van-sidebar-item class="nav-tabs-item" title="标签名称" />
-          <van-sidebar-item class="nav-tabs-item" title="标签名称" />
-          <van-sidebar-item class="nav-tabs-item" title="标签名称" />
-
+          <van-sidebar-item @click="handleSidenavigation(item.rankingId)" v-for="item in Sidenavigation "
+            class="nav-tabs-item" :title="item.name" />
         </van-sidebar>
       </div>
       <div class="nav-right">
 
 
 
-        <div class="content-box">
-          <img class="content-box-img"
-            src="//imagev2.xmcdn.com/storages/5a86-audiofreehighqps/D8/E5/GKwRIJEFfkl9AAOIigD9zcBJ.png!op_type=3&columns=144&rows=144&magick=webp"
-            alt="">
-          <div class="content-box-item">
-            <div class="content-box-text">郭德纲21年相声精选</div>
-            <div class="content-box-icon">
-              <!-- <van-icon  name="cross" size="14" /> -->
-              <van-icon name="play" size="16" color="#aaa" />
 
-              <div class="content-bottom">18</div>
-              <van-icon name="coupon-o" color="#aaa" />
-              <div class="content-bottom">144</div>
+        <div class="content-box" v-for="(item, index) in navOtemList" :key="index">
+
+
+
+          <img class="content-box-img" :src="`//imagev2.xmcdn.com/${item.cover}`" alt="">
+          <div class="content-box-item">
+            <div class="content-box-text">{{ item.albumTitle }}</div>
+            <div class="content-box-text1">{{ item.salePoint }}</div>
+            <div class="content-box-icon">
+              <van-icon name="play-circle-o" size="16" />
+              <div class="content-bottom">{{ (item.playCount / 100000000).toFixed(2) }}亿</div>
+              <van-icon name="first-aid" size="14" />
+              <div class="content-bottom">{{ item.trackCount }}</div>
             </div>
           </div>
 
         </div>
 
 
-        <ItemList></ItemList>
+
 
 
       </div>
@@ -70,8 +68,37 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { lxy_first, lxy_secondary } from '../../api/fication'
 
 const activeKey = ref<string>('')
+
+const navigation = ref<any>([])
+const Sidenavigation = ref<any>([])
+const navOtemList = ref<any>([])
+lxy_first().then((res) => {
+
+
+  navigation.value = res.data.data.tabLists
+
+})
+//顶导航处理函数
+const handleNavigationActive = (active: any) => {
+  Sidenavigation.value = active.tabWraps
+
+
+}
+//测导航处理函数
+const handleSidenavigation = (id: string) => {
+  lxy_secondary(id).then((res) => {
+    navOtemList.value = res.data.data.rankList[0].albums
+
+
+  })
+
+
+}
+
+
 </script>
 
 <style lang="less"  scoped>
@@ -98,13 +125,15 @@ const activeKey = ref<string>('')
     .nav_right_l {
       color: #fff;
       background-color: #fa2800;
-      border-radius: 15px;
+      border-radius: 74px;
       border: none;
       width: 76px;
       font-size: 14px;
       text-align: center;
-      padding-top: 6px;
+      padding-top: 7px;
       box-sizing: border-box;
+      height: 30px;
+      text-align: center;
 
 
     }
